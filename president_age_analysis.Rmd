@@ -1,0 +1,47 @@
+---
+title: "Analysis - President Age vs. Average Life Expectancy"
+author: "Brendan Mapes"
+date: "2024-03-14"
+output: html_document
+---
+
+The 2024 Presidential race features the two oldest candidates to ever run for office facing off against each other. Previously, the two oldest candidates to run for office were... also Donald Trump and Joe Biden, in 2020. There has been much ado about the age of both candidates in this race, with many voters voicing that the age of the candidates is a serious concern. 
+
+We know that both candidates are old - but how old are they in relative terms? Life expectancy has been steadily increasing since the days of George Washington - maybe it's the case that, relative to average life expectancy, these candidates aren't as old as they seem?
+
+Let's find out. 
+
+```{r setup}
+
+library(tidyverse)
+library(readxl)
+
+```
+
+```{r}
+# read in data
+life_expect <- read_csv("life-expectancy.csv")
+age <- read_excel("president_age_and_year.xlsx")
+```
+
+
+```{r}
+## Clean age data
+
+age %>% 
+  mutate(age_start = as.numeric(str_sub(`Age at start of presidency`, start = 1L, end = 2L)),
+         age_end = as.numeric(str_sub(`Age at end of presidency`, start = 1L, end = 2L)),
+         two_term = if_else(age_end-age_start>4, "yes", "no"),
+         year_start = as.numeric(str_sub(`Start of Presidency`, start = -4L, end = -1L)),
+         year_end = as.numeric(str_sub(`End of Presidency`, start = -4L, end = -1L))) -> age
+
+```
+```{r}
+
+```
+
+
+
+
+
+
